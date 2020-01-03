@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=emerge
+      - POSTGRES_PASSWORD=emerge
+      - POSTGRES_INITDB_ARGS="--data-checksums"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+  
+  app:
+    build:
+      context: https://github.com/piotr-piotr/todo.git
+    restart: always
+    ports:
+      - "8080:8080"
+    
+volumes:
+  dbdata:
