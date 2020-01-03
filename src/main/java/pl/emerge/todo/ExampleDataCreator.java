@@ -14,9 +14,11 @@ public class ExampleDataCreator implements CommandLineRunner {
     
     @Override
     public void run(String... args) throws Exception {
-        taskRepository.save(new Task("bake a cake", "Bake some strawberry cake.", false));
-        taskRepository.save(new Task("cook kompot", "Cook some strawberry kompot.", false));
-        taskRepository.save(new Task("invite guests", "Prepare guests list, email invitations, make sure they received them.", false));
+        if (taskRepository.count() == 0) {
+            taskRepository.save(new Task("bake a cake", "Bake some strawberry cake.", false));
+            taskRepository.save(new Task("cook kompot", "Cook some strawberry kompot.", false));
+            taskRepository.save(new Task("invite guests", "Prepare guests list, email invitations, make sure they received them.", false));
+        }
     }
     
 }
