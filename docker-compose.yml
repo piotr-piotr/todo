@@ -5,22 +5,19 @@ services:
     ports:
       - "5432:5432"
     restart: always
-    environment:
-      - POSTGRES_USER=emerge
-      - POSTGRES_PASSWORD=emerge
-      - POSTGRES_INITDB_ARGS="--data-checksums"
+    env_file: db.env
     volumes:
       - dbdata:/var/lib/postgresql/data
       - ./db/:/docker-entrypoint-initdb.d/
-  
+
   app:
     build:
-      context: https://github.com/piotr-piotr/todo.git
+      context: https://github.com/piotr-piotr/todotest.git
     restart: always
     ports:
       - "8080:8080"
     depends_on:
       - db
-    
+
 volumes:
   dbdata:
