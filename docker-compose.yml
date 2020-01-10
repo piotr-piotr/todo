@@ -7,6 +7,10 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data
       - ./db/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
 
   app:
     build:
@@ -16,6 +20,13 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    networks:
+      - backend
+      - frontend
 
 volumes:
   dbdata:
+
+networks:
+  frontend:
+  backend:
