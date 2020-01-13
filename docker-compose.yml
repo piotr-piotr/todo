@@ -3,7 +3,11 @@ services:
   db:
     image: postgres:latest
     restart: always
-    env_file: db.env
+    environment:
+      - POSTGRES_USER=emerge
+      - POSTGRES_PASSWORD=emerge
+      - POSTGRES_DB=emerge
+      - POSTGRES_INITDB_ARGS="--data-checksums"
     volumes:
       - dbdata:/var/lib/postgresql/data
       - ./db/:/docker-entrypoint-initdb.d/
